@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraphqlDemo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250423145820_InitBooks")]
-    partial class InitBooks
+    [Migration("20250423203346_InitBook")]
+    partial class InitBook
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,8 +26,11 @@ namespace GraphqlDemo.Migrations
 
             modelBuilder.Entity("GraphqlDemo.Models.Book", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Author")
                         .IsRequired()

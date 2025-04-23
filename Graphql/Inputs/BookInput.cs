@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace GraphqlDemo.Models
+﻿namespace GraphqlDemo.Graphql.Inputs
 {
-    public class Book
+    public class BookInput
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Genre { get; set; }

@@ -1,17 +1,18 @@
 using GraphqlDemo.DBAccess;
+using GraphqlDemo.Graphql.Mutations;
 using GraphqlDemo.Graphql.Queries;
 using HotChocolate.AspNetCore.Voyager;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContextPool<AppDbContext>(options =>
+builder.Services.AddPooledDbContextFactory<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<BookQuery>()
-    .RegisterDbContextFactory<AppDbContext>()
+    .AddMutationType<BookMutation>()
     .AddFiltering()
     .AddSorting();
 
